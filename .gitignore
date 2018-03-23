@@ -1,4 +1,4 @@
 venv
 *.pyc
-tasks.db
+songs.db
 __pycache__
