@@ -1,6 +1,10 @@
 from application import app, db
-from flask import render_template, request
+from flask import redirect, render_template, request, url_for
 from application.songs.models import Song
+
+@app.route("/songs/", methods=["GET"])
+def songs_index():
+    return render_template("songs/list.html", songs = Song.query.all())
 
 @app.route("/songs/new/")
 def songs_form():
@@ -8,6 +12,19 @@ def songs_form():
 
 @app.route("/songs/", methods=["POST"])
 def songs_create():
-    print(request.form.get("name"))
+    s = Song(request.form.get("name"))
+
+    db.session().add(s)
+    db.session().commit()
+
+    return redirect(url_for("songs_index"))
+
+
+@app.route("/songs/<song_id>/", methods=["POST"])
+def songs_set_good(song_id):
+
+    s = Song.query.get(song_id)
+    s.good = True
+    db.session().commit()
   
-    return "hello world!"
+    return redirect(url_for("songs_index"))
