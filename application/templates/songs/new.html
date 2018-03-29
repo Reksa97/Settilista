@@ -1,8 +1,70 @@
-{% extends "layout.html" %}
-  
-{% block body %}
+{% extends "layout.html" %} {% block body %}
 <form method="POST" action="{{ url_for('songs_create') }}">
-  <input type="text" name="name"/>
-  <input type="submit" value="Add a new song"/>
+  <table>
+    <tr>
+      <td>
+        {{ form.name.label }}
+      </td>
+      <td>
+        {{ form.name }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.name.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.artist.label }}
+      </td>
+      <td>
+        {{ form.artist }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.artist.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.songkey.label }}
+      </td>
+      <td>
+        {{ form.songkey }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.songkey.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.length.label }}
+      </td>
+      <td>
+        {{ form.length }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.length.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" value="Add a new song" />
+      </td>
+    </tr>
 </form>
 {% endblock %}

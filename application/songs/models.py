@@ -7,8 +7,11 @@ class Song(db.Model):
     onupdate=db.func.current_timestamp())
 
     name = db.Column(db.String(144), nullable=False)
-    good = db.Column(db.Boolean, nullable=False)
+    artist = db.Column(db.String(144), nullable=False)
+    length = db.Column(db.Integer, nullable=False)
+    songkey = db.Column(db.String(144), nullable=False)
+    public = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, name):
         self.name = name
-        self.good = False
+        self.public = False
