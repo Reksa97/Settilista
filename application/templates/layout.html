@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>SettilistaApp</title>
-  </head>
 
-  <body>
-    <li><a href="{{ url_for('songs_index') }}">List songs</a></li>
-    <li><a href="{{ url_for('songs_form') }}">Add a song</a></li>
+<head>
+  <meta charset="utf-8">
+  <title>SettilistaApp</title>
+</head>
 
-    {% block body %}
-      <p>
-        Content.
-      </p>
-    {% endblock %}
-  </body>
+<body>
+  {% if current_user.is_authenticated %}
+  <p>
+    Kirjautunut nimellä {{ current_user.name }}.
+    <a href="{{ url_for('auth_logout') }}">Logout</a>
+  </p>
+  {% else %}
+  <a href="{{ url_for('auth_login') }}">Login</a>
+  <a href="{{ url_for('auth_signup') }}">Sign Up</a>
+  
+  {% endif %}
+  <li>
+    <a href="{{ url_for('songs_index') }}">List songs</a>
+  </li>
+  <li>
+    <a href="{{ url_for('songs_form') }}">Add a song</a>
+  </li>
+
+  {% block body %}
+  <p>
+    Content.
+  </p>
+  {% endblock %}
+</body>
+
 </html>
