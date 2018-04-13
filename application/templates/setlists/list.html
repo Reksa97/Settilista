@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Setlist</th>
+      <th>Length</th>
+      <th>Public</th>
+    </tr>
+    {% for setlist in setlists %}
+    <tr>
+      <td>{{ setlist.name }}</td>
+      <td>{{ setlist.length }}</td>
+      <td>{{ setlist.public }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

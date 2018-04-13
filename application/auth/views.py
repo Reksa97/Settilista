@@ -19,12 +19,12 @@ def auth_login():
                                error = "No such username or password")
 
     login_user(user)
-    return redirect(url_for("index"))    
+    return redirect(url_for("songs_index"))    
 
 @app.route("/auth/logout", methods = ["GET", "POST"])
 def auth_logout():
     logout_user()
-    return redirect(url_for("index"))
+    return redirect(url_for("songs_index"))
 
 @app.route("/auth/signup", methods = ["GET"])
 def auth_signup():

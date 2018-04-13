@@ -1,6 +1,20 @@
 {% extends "layout.html" %}
 
 {% block body %}
+{% if no_songs is defined %}
+<p>
+  The following users haven't added songs yet:
+</p>
+
+<ul>
+  {% for user in no_songs %}
+  <li>
+    {{user.id}} {{user.username}}
+  </li>
+  {% endfor %}
+</ul>
+
+{% endif %}
   <table>
     <tr>
       <th>Song</th>
@@ -15,6 +29,9 @@
       <td>
           <form method="POST" action="{{ url_for('songs_set_public', song_id=song.id) }}">
               <input type="submit" value="Change status!"/>
+          </form>
+          <form method="POST" action="{{ url_for('songs_delete', song_id=song.id) }}">
+            <input type="submit" value="Delete song"/>
           </form>
       </td>
     </tr>

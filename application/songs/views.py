@@ -1,13 +1,14 @@
-from flask import redirect, render_template, request, url_for
+from flask import redirect, render_template, request, url_for, flash
 from flask_login import login_required, current_user
 
 from application import app, db
 from application.songs.models import Song
 from application.songs.forms import SongForm
+from application.auth.models import User
 
-@app.route("/songs/", methods=["GET"])
+@app.route("/", methods=["GET"])
 def songs_index():
-    return render_template("songs/list.html", songs = Song.query.all())
+    return render_template("songs/list.html", songs = Song.query.all(), no_songs=User.find_accounts_with_no_added_songs())
 
 @app.route("/songs/new/")
 @login_required
@@ -46,4 +47,16 @@ def songs_set_public(song_id):
 
     db.session().commit()
   
+    return redirect(url_for("songs_index"))
+
+@app.route("/songs/<song_id>/delete", methods=["POST"])
+@login_required
+def songs_delete(song_id):
+
+    s = Song.query.get(song_id)
+
+    db.session.delete(s)
+    db.session.commit()
+    flash("Song deleted")
+
     return redirect(url_for("songs_index"))

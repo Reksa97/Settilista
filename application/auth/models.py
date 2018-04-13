@@ -1,13 +1,11 @@
 from application import db
+from application.models import Base
 
-class User(db.Model):
+from sqlalchemy.sql import text
+
+class User(Base):
 
     __tablename__ = "account"
-  
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
-                              onupdate=db.func.current_timestamp())
 
     name = db.Column(db.String(144), nullable=False)
     username = db.Column(db.String(144), nullable=False)
@@ -29,3 +27,17 @@ class User(db.Model):
 
     def is_authenticated(self):
         return True
+
+    @staticmethod
+    def find_accounts_with_no_added_songs():
+        stmt = text("SELECT Account.id, Account.username FROM Account"
+                    " LEFT JOIN Song ON Song.account_id = Account.id"
+                    " GROUP BY Account.id"
+                    " HAVING COUNT(Song.id) = 0")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"id":row[0], "username":row[1]})
+
+        return response
