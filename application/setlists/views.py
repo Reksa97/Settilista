@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, url_for, flash
 from flask_login import login_required, current_user
 
 from application import app, db
-from application.songs.models import Song
+from application.songs.models import Song, SetlistSong
 from application.songs.forms import SongForm
 
 from application.setlists.models import Setlist
@@ -35,6 +35,10 @@ def setlists_create():
     return redirect(url_for("setlists_index"))
 
 @app.route("/setlists/<setlist_id>", methods=["GET"])
-def setlists_show():
+def setlists_show(setlist_id):
 
     setlist = Setlist.query.get(setlist_id)
+
+    songs = SetlistSong.query.filter_by(setlist_id = setlist_id).all()
+
+    return render_template("setlists/show.html", songs=songs, setlist=setlist)

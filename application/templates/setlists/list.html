@@ -1,18 +1,13 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <table>
-    <tr>
-      <th>Setlist</th>
-      <th>Length</th>
-      <th>Public</th>
-    </tr>
-    {% for setlist in setlists %}
-    <tr>
-      <td>{{ setlist.name }}</td>
-      <td>{{ setlist.length }}</td>
-      <td>{{ setlist.public }}</td>
-    </tr>
-    {% endfor %}
-  </table>
+<ul class="list-group">
+  
+  {% for setlist in setlists %}
+    <li class="list-group-item">
+      <a href="{{ url_for('setlists_show', setlist_id = setlist.id) }}">{{ setlist.name }}</a>
+    </li>
+  {% endfor %}
+  
+</ul>
 {% endblock %}

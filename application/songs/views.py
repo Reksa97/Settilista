@@ -62,7 +62,6 @@ def songs_addtosetlist(song_id):
     
     if request.method == "GET":
         return render_template("songs/tosetlist.html", form=form, song=s)
-    
     sls = SetlistSong(s.name)
     sls.account_id = current_user.id
     sls.setlist_id = form.setlist.data
@@ -75,7 +74,7 @@ def songs_addtosetlist(song_id):
     db.session().add(sls)
     
     db.session().commit()
-    return redirect(url_for("songs_index"))
+    return redirect(url_for("setlists_show", setlist_id=sls.setlist_id))
     
 
 @app.route("/songs/<song_id>/delete", methods=["POST"])
