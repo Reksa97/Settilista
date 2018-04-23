@@ -13,8 +13,8 @@ class SongForm(FlaskForm):
         csrf = False
 
 class SetlistSongForm(FlaskForm):
-    setlist_id = SelectField(u'Setlist', coerce=int)
+    setlist = SelectField(u'Setlist', coerce=int, validators=[validators.NumberRange(min=0)])
     songkey = SelectField(u'Song key', choices=[('Am', 'Am'), ('A', 'A'), ('Bbm', 'Bbm'), ('Bb', 'Bb'), ('Bm', 'Bm'), ('B', 'B'), ('Cm', 'Cm'), ('C', 'C'),
     ('C#m', 'C#m'), ('C#', 'C#'), ('Dm', 'Dm'), ('D', 'D'), ('Ebm', 'Ebm'), ('Eb', 'Eb'), ('Em', 'Em'), ('E', 'E'), ('Fm', 'Fm'), ('F', 'F'), ('F#m', 'F#m'), ('F#', 'F#'),
     ('Gm', 'Gm'), ('G', 'G'), ('G#m', 'G#m'), ('Ab', 'Ab')])
-    notes = StringField("Notes", [validators.InputRequired])
+    notes = StringField("Notes", [validators.InputRequired()])

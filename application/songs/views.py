@@ -2,9 +2,10 @@ from flask import redirect, render_template, request, url_for, flash
 from flask_login import login_required, current_user
 
 from application import app, db
-from application.songs.models import Song
-from application.songs.forms import SongForm
+from application.songs.models import Song, SetlistSong
+from application.songs.forms import SongForm, SetlistSongForm
 from application.auth.models import User
+from application.setlists.models import Setlist
 
 @app.route("/", methods=["GET"])
 def songs_index():
@@ -48,6 +49,34 @@ def songs_set_public(song_id):
     db.session().commit()
   
     return redirect(url_for("songs_index"))
+
+
+@app.route("/songs/<song_id>/tosetlist", methods=["GET", "POST"])
+@login_required
+def songs_addtosetlist(song_id):
+
+    s = Song.query.get(song_id)
+    form = SetlistSongForm(request.form)
+    setlists = Setlist.query.filter_by(account_id=current_user.id).all()
+    form.setlist.choices = [(setlist.id, setlist.name) for setlist in setlists]
+    
+    if request.method == "GET":
+        return render_template("songs/tosetlist.html", form=form, song=s)
+    
+    sls = SetlistSong(s.name)
+    sls.account_id = current_user.id
+    sls.setlist_id = form.setlist.data
+    sls.artist = s.artist
+    sls.length = s.length
+    sls.songkey = form.songkey.data
+    
+    sls.notes = form.notes.data
+    
+    db.session().add(sls)
+    
+    db.session().commit()
+    return redirect(url_for("songs_index"))
+    
 
 @app.route("/songs/<song_id>/delete", methods=["POST"])
 @login_required

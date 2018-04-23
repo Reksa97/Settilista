@@ -27,6 +27,9 @@
       <td>{{ song.artist }}</td>
       <td>{{ song.public }}</td>
       <td>
+        <a href="{{ url_for('songs_addtosetlist', song_id = song.id) }}">Add song to a setlist</a>
+      </td>
+      <td>
           <form method="POST" action="{{ url_for('songs_set_public', song_id=song.id) }}">
               <input type="submit" value="Change status!"/>
           </form>

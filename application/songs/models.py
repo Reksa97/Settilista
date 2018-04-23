@@ -24,7 +24,8 @@ class SetlistSong(Base):
     songkey = db.Column(db.String(144), nullable=False)
     notes = db.Column(db.String(144), nullable=False)
 
-    setlist_id = db.Column(db.Integer, db.ForeignKey('setlist.id'))
+    setlist_id = db.Column(db.Integer, db.ForeignKey('setlist.id'),
+                            nullable=False)
 
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
                             nullable=False)
