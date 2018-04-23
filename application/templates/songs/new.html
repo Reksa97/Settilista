@@ -1,70 +1,48 @@
 {% extends "layout.html" %} {% block body %}
+
 <form method="POST" action="{{ url_for('songs_create') }}">
-  <table>
-    <tr>
-      <td>
-        {{ form.name.label }}
-      </td>
-      <td>
-        {{ form.name }}
-      </td>
-      <td>
-        <ul>
-          {% for error in form.name.errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        {{ form.artist.label }}
-      </td>
-      <td>
-        {{ form.artist }}
-      </td>
-      <td>
-        <ul>
-          {% for error in form.artist.errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        {{ form.songkey.label }}
-      </td>
-      <td>
-        {{ form.songkey }}
-      </td>
-      <td>
-        <ul>
-          {% for error in form.songkey.errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        {{ form.length.label }}
-      </td>
-      <td>
-        {{ form.length }}
-      </td>
-      <td>
-        <ul>
-          {% for error in form.length.errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <input type="submit" value="Add a new song" />
-      </td>
-    </tr>
-</form>
+  <div class="form-group">
+    <label for="{{ form.name.id }}" class="control-label">{{ form.name.label }}
+    </label>
+    <div>
+      {{ form.name(class_='form-control') }}
+    </div>
+    {% if form.name.errors %} {% for error in form.name.errors %}
+    <small class="form-text text-muted"<{{ error }}</small>
+    {% endfor %} {% endif %}
+  </div>
+  <div class="form-group">
+    <label for="{{ form.artist.id }}" class="control-label">{{ form.artist.label }}
+    </label>
+    <div>
+      {{ form.artist(class_='form-control') }}
+    </div>
+    {% if form.artist.errors %} {% for error in form.artist.errors %}
+    <small class="form-text text-muted"<{{ error }}</small>
+    {% endfor %} {% endif %}
+  </div>
+  <div class="form-group">
+    <label for="{{ form.songkey.id }}" class="control-label">{{ form.songkey.label }}
+    </label>
+    <div>
+      {{ form.songkey(class_='form-control') }}
+    </div>
+    {% if form.songkey.errors %} {% for error in form.songkey.errors %}
+    <small class="form-text text-muted"<{{ error }}</small>
+    {% endfor %} {% endif %}
+  </div>
+  <div class="form-group">
+    <label for="{{ form.length.id }}" class="control-label">{{ form.length.label }}
+    </label>
+    <div>
+      {{ form.length(class_='form-control') }}
+    </div>
+    {% if form.length.errors %} {% for error in form.length.errors %}
+    <small class="form-text text-muted"<{{ error }}</small>
+    {% endfor %} {% endif %}
+  </div>
+  <button type="submit" class="btn btn-primary">Add a new song</button>
+
+</form>  
+      
 {% endblock %}
