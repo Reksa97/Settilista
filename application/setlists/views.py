@@ -39,6 +39,11 @@ def setlists_show(setlist_id):
 
     setlist = Setlist.query.get(setlist_id)
 
-    songs = SetlistSong.query.filter_by(setlist_id = setlist_id).all()
+    songs = SetlistSong.query.filter_by(setlist_id = setlist_id).order_by(SetlistSong.notes).all()
+    length = 0
+    for song in songs:
+        length += song.length
+    lengthMinutes = length//60
+    lengthSeconds = length%60
 
-    return render_template("setlists/show.html", songs=songs, setlist=setlist)
+    return render_template("setlists/show.html", songs=songs, setlist=setlist, lengthMinutes=lengthMinutes, lengthSeconds=lengthSeconds)

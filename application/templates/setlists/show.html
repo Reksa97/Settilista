@@ -1,26 +1,48 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1>Settilista: {{ setlist.name }}</h1>
+
+
+<div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">Ordering a setlist</h4>
+    <p>
+      Songs in a setlist are ordered by the 'Notes' column.
+      You can order your setlist by adding the desired index in
+      the beginning of your notes. 
+    </p>
+    <hr>
+    <p>e.g.</p>
+    <p><kbd>1. Song structure: AABA</kbd></p>
+    <p><kbd>2. Remember to look cool</kbd></p>
+</div>
+
+<h2>Setlist: {{ setlist.name }}</h2>
+<h5>Length (minutes:seconds): <time>{{ lengthMinutes }}:{{ lengthSeconds }}</time></h5>
+<style>
+  table { table-layout: fixed; }
+  table th, table td {overflow: hidden; }
+</style>
+
 <table class="table">
 <thead>
   <tr>
-    <th scope="col">#</th>
-    <th scope="col">Name</th>
-    <th scope="col">Artist</th>
-    <th scope="col">Song key</th>
-    <th scope="col">Notes</th>
+    <th style="width: 20%">Name</th>
+    <th style="width: 20%">Artist</th>
+    <th style="width: 10%">Key</th>
+    <th style="width: 40%">Notes</th>
+    <th style="width: 10%"></th>
   </tr>
 </thead>
 <tbody>
     
   {% for song in songs %}
   <tr>
-    <th scope="row"></th>
     <td>{{ song.name }}</td>
     <td>{{ song.artist }}</td>
     <td>{{ song.songkey }}</td>
-    <td width="50px">{{ song.notes }}</td>
+    <td>{{ song.notes }}</td>
+    <td><a href="{{ url_for('setlistsongs_edit', setlistsong_id = song.id) }}">Edit</a></td>
+    
 </tr>
 
   {% endfor %}
