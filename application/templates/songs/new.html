@@ -9,7 +9,7 @@
       {{ form.name(class_='form-control') }}
     </div>
     {% if form.name.errors %} {% for error in form.name.errors %}
-    <small class="form-text text-muted"<{{ error }}</small>
+    <small class="form-text text-muted">{{ error }}</small>
     {% endfor %} {% endif %}
   </div>
   <div class="form-group">
@@ -19,7 +19,7 @@
       {{ form.artist(class_='form-control') }}
     </div>
     {% if form.artist.errors %} {% for error in form.artist.errors %}
-    <small class="form-text text-muted"<{{ error }}</small>
+    <small class="form-text text-muted">{{ error }}</small>
     {% endfor %} {% endif %}
   </div>
   <div class="form-group">
@@ -29,7 +29,7 @@
       {{ form.songkey(class_='form-control') }}
     </div>
     {% if form.songkey.errors %} {% for error in form.songkey.errors %}
-    <small class="form-text text-muted"<{{ error }}</small>
+    <small class="form-text text-muted">{{ error }}</small>
     {% endfor %} {% endif %}
   </div>
   <div class="form-group">
@@ -39,7 +39,7 @@
       {{ form.length(class_='form-control') }}
     </div>
     {% if form.length.errors %} {% for error in form.length.errors %}
-    <small class="form-text text-muted"<{{ error }}</small>
+    <small class="form-text text-muted">{{ error }}</small>
     {% endfor %} {% endif %}
   </div>
   <button type="submit" class="btn btn-primary">Add a new song</button>

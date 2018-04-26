@@ -8,7 +8,7 @@ class SongForm(FlaskForm):
     ('C#m', 'C#m'), ('C#', 'C#'), ('Dm', 'Dm'), ('D', 'D'), ('Ebm', 'Ebm'), ('Eb', 'Eb'), ('Em', 'Em'), ('E', 'E'), ('Fm', 'Fm'), ('F', 'F'), ('F#m', 'F#m'), ('F#', 'F#'),
     ('Gm', 'Gm'), ('G', 'G'), ('G#m', 'G#m'), ('Ab', 'Ab')])
     length = IntegerField("Song length (seconds)", 
-    [validators.NumberRange(min=0, message="length must be atleast 0")])
+    [validators.NumberRange(min=0, message="Length must be atleast 0")])
     class Meta:
         csrf = False
 

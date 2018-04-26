@@ -1,43 +1,48 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} {% block body %} {% if no_songs is defined %}
 
-{% block body %}
-{% if no_songs is defined %}
-<p>
-  The following users haven't added songs yet:
-</p>
-
-<ul>
-  {% for user in no_songs %}
-  <li>
-    {{user.id}} {{user.username}}
-  </li>
-  {% endfor %}
-</ul>
-
-{% endif %}
-  <table>
-    <tr>
-      <th>Song</th>
-      <th>Artist</th>
-      <th>Public</th>
-    </tr>
-    {% for song in songs %}
-    <tr>
-      <td>{{ song.name }}</td>
-      <td>{{ song.artist }}</td>
-      <td>{{ song.public }}</td>
-      <td>
-        <a href="{{ url_for('songs_addtosetlist', song_id = song.id) }}">Add song to a setlist</a>
-      </td>
-      <td>
-          <form method="POST" action="{{ url_for('songs_set_public', song_id=song.id) }}">
-              <input type="submit" value="Change status!"/>
-          </form>
-          <form method="POST" action="{{ url_for('songs_delete', song_id=song.id) }}">
-            <input type="submit" value="Delete song"/>
-          </form>
-      </td>
-    </tr>
+<div class="alert alert-secondary" role="alert">
+  <p>
+    The following users haven't added songs yet:
+  </p>
+  <ul>
+    {% for user in no_songs %}
+    <li>
+      {{user.id}} {{user.username}}
+    </li>
     {% endfor %}
-  </table>
+  </ul>
+</div>
+{% endif %}
+<table class="table">
+  <tr>
+    <th>Song</th>
+    <th>Artist</th>
+    <th>Length (seconds)</th>
+    <th></th>
+  </tr>
+  {% for song in songs %}
+  <tr>
+    <td>{{ song.name }}</td>
+    <td>{{ song.artist }}</td>
+    <td>{{ song.length }}</td>
+    <td>
+      <a href="{{ url_for('songs_addtosetlist', song_id = song.id) }}">Add song to a setlist</a>
+    </td>
+
+    {% if current_user_id == song.account_id %}
+    <td>
+      Public: {{ song.public }}
+      <form method="POST" action="{{ url_for('songs_set_public', song_id=song.id) }}">
+        <button type="submit" class="btn btn-dark">Change status</button>
+      </form>
+    </td>
+    <td>
+      <form method="GET" action="{{ url_for('songs_edit', song_id=song.id) }}">
+        <button type="submit" class="btn btn-warning">Edit</button>
+      </form>
+    </td>
+    {% endif %}
+  </tr>
+  {% endfor %}
+</table>
 {% endblock %}

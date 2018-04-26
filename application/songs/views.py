@@ -8,8 +8,10 @@ from application.auth.models import User
 from application.setlists.models import Setlist
 
 @app.route("/", methods=["GET"])
+@login_required
 def songs_index():
-    return render_template("songs/list.html", songs = Song.query.all(), no_songs=User.find_accounts_with_no_added_songs())
+    return render_template("songs/list.html", songs = Song.query.filter((Song.public==True) | (Song.account_id == current_user.id))
+                                .all(), no_songs=User.find_accounts_with_no_added_songs(), current_user_id=current_user.id)
 
 @app.route("/songs/new/")
 @login_required
@@ -33,6 +35,7 @@ def songs_create():
     
     db.session().commit()
 
+    flash("Song successfully created!")
     return redirect(url_for("songs_index"))
 
 
@@ -50,6 +53,37 @@ def songs_set_public(song_id):
   
     return redirect(url_for("songs_index"))
 
+@app.route("/songs/<song_id>/edit", methods=["GET","POST"])
+@login_required
+def songs_edit(song_id):
+
+    s = Song.query.get(song_id)
+
+    if s.account_id != current_user.id:
+        flash("You can only edit songs you've added yourself!")
+        return redirect(url_for("songs_index"))
+
+    form = SongForm(request.form)
+
+    if request.method == "GET":
+        form.name.default = s.name
+        form.artist.default = s.artist
+        form.length.default = s.length
+        form.songkey.default = s.songkey
+        form.process()
+        return render_template("songs/edit.html", form=form, song=s)
+
+
+
+    s.name = form.name.data
+    s.artist = form.artist.data
+    s.length = form.length.data
+    s.songkey = form.songkey.data
+
+    db.session().commit()
+    flash("Song successfully edited!")
+    return redirect(url_for("songs_index"))
+
 
 @app.route("/songs/<song_id>/tosetlist", methods=["GET", "POST"])
 @login_required
@@ -65,6 +99,9 @@ def songs_addtosetlist(song_id):
         form.process()
         return render_template("songs/tosetlist.html", form=form, song=s)
     
+    if not form.validate():
+        return render_template("songs/tosetlist.html", form=form, song=s)
+    
     sls = SetlistSong(s.name)
     sls.account_id = current_user.id
     sls.setlist_id = form.setlist.data
@@ -78,6 +115,7 @@ def songs_addtosetlist(song_id):
     db.session().add(sls)
     
     db.session().commit()
+    flash("Song successfully added to the setlist")
     return redirect(url_for("setlists_show", setlist_id=sls.setlist_id))
     
 
@@ -86,6 +124,10 @@ def songs_addtosetlist(song_id):
 def songs_delete(song_id):
 
     s = Song.query.get(song_id)
+
+    if song.account_id != current_user.id:
+        flash("You can only delete songs you've added yourself!")
+        return redirect(url_for("songs_index"))
 
     db.session.delete(s)
     db.session.commit()

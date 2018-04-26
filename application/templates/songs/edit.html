@@ -1,0 +1,52 @@
+{% extends "layout.html" %} {% block body %}
+
+<form method="POST" action="{{ url_for('songs_edit', song_id=song.id) }}">
+    <div class="form-group">
+        <label for="{{ form.name.id }}" class="control-label">{{ form.name.label }}
+        </label>
+        <div>
+            {{ form.name(class_='form-control') }}
+        </div>
+        {% if form.name.errors %} {% for error in form.name.errors %}
+        <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %} {% endif %}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.artist.id }}" class="control-label">{{ form.artist.label }}
+        </label>
+        <div>
+            {{ form.artist(class_='form-control') }}
+        </div>
+        {% if form.artist.errors %} {% for error in form.artist.errors %}
+        <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %} {% endif %}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.songkey.id }}" class="control-label">{{ form.songkey.label }}
+        </label>
+        <div>
+            {{ form.songkey(class_='form-control') }}
+        </div>
+        {% if form.songkey.errors %} {% for error in form.songkey.errors %}
+        <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %} {% endif %}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.length.id }}" class="control-label">{{ form.length.label }}
+        </label>
+        <div>
+            {{ form.length(class_='form-control') }}
+        </div>
+        {% if form.length.errors %} {% for error in form.length.errors %}
+        <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %} {% endif %}
+    </div>
+    <div>
+        <button type="submit" class="btn btn-warning">Edit song</button>
+    </div>
+</form>
+<div class="col-xs-12" style="height:60px;"></div>
+<form method="POST" action="{{ url_for('songs_delete', song_id=song.id) }}">
+    <button type="submit" class="btn btn-danger">DELETE song</button>
+</form>
+{% endblock %}
