@@ -142,6 +142,7 @@ def setlistsongs_edit(setlistsong_id):
     s = SetlistSong.query.get(setlistsong_id)
 
     if s.account_id != current_user.id:
+        flash("You can only edit songs in your own setlists!")
         return redirect(url_for("songs_index"))
 
     form = EditSetlistSongForm(request.form)

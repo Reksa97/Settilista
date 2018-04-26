@@ -15,7 +15,9 @@
     <p><kbd>1. Song structure: AABA</kbd></p>
     <p><kbd>2. Remember to look cool</kbd></p>
 </div>
-
+<form method="GET" action="{{ url_for('songs_index') }}">
+    <button type="submit" class="btn btn-primary">Add songs to this setlist</button>
+</form>
 <h2>Setlist: {{ setlist.name }}</h2>
 <h5>Length (minutes:seconds): <time>{{ lengthMinutes }}:{{ lengthSeconds }}</time></h5>
 <style>
@@ -41,7 +43,11 @@
     <td>{{ song.artist }}</td>
     <td>{{ song.songkey }}</td>
     <td>{{ song.notes }}</td>
-    <td><a href="{{ url_for('setlistsongs_edit', setlistsong_id = song.id) }}">Edit</a></td>
+    <td> 
+      <form method="GET" action="{{ url_for('setlistsongs_edit', setlistsong_id=song.id) }}">
+        <button type="submit" class="btn btn-primary">Edit</button>
+      </form>
+    </td>
     
 </tr>
 
