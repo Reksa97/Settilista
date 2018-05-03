@@ -1,49 +1,44 @@
-{% extends "layout.html" %} {% block body %} {{ error }}
+{% extends "layout.html" %} {% block body %} 
+
+{% if error %}
+<div class="alert alert-warning" role="alert">
+      <p>{{ error }}</p>
+</div>
+{% endif %}
+
+
 <form method="POST" action="{{ url_for('auth_signup_new') }}">
-    <table>
-        <tr>
-            <td>
-                {{ form.username.label }}
-            </td>
-            <td>
-                {{ form.username }}
-            </td>
-            <td>
-                {% for error in form.username.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.name.label }}
-            </td>
-            <td>
-                {{ form.name }}
-            </td>
-            <td>
-                {% for error in form.name.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.password.label }}
-            </td>
-            <td>
-                {{ form.password }}
-            </td>
-            <td>
-                {% for error in form.password.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="Create account" />
-            </td>
-        </tr>
+    <div class="form-group">
+        <label for="{{ form.username.id }}" class="control-label">{{ form.username.label }}
+        </label>
+        <div>
+            {{ form.username(class_='form-control') }}
+        </div>
+        {% if form.username.errors %} {% for error in form.username.errors %}
+        <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %} {% endif %}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.password.id }}" class="control-label">{{ form.password.label }}
+        </label>
+        <div>
+            {{ form.password(class_='form-control') }}
+        </div>
+        {% if form.password.errors %} {% for error in form.password.errors %}
+        <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %} {% endif %}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.name.id }}" class="control-label">{{ form.name.label }}
+        </label>
+        <div>
+            {{ form.name(class_='form-control') }}
+        </div>
+        {% if form.name.errors %} {% for error in form.name.errors %}
+        <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %} {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Create account</button>
+
 </form>
 {% endblock %}
