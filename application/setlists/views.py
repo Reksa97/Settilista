@@ -9,8 +9,9 @@ from application.setlists.models import Setlist
 from application.setlists.forms import SetlistForm
 
 @app.route("/setlists/", methods=["GET"])
+@login_required
 def setlists_index():
-    return render_template("setlists/list.html", setlists = Setlist.query.all())
+    return render_template("setlists/list.html", userSetlists = Setlist.query.filter_by(account_id = current_user.id).all(), otherSetlists = Setlist.query.filter(Setlist.account_id != current_user.id).all())
 
 @app.route("/setlists/new")
 @login_required

@@ -2,8 +2,18 @@
 
 {% block body %}
 <ul class="list-group">
+  <h2>Your setlists</h2>
+  {% for setlist in userSetlists %}
+    <li class="list-group-item">
+      <a href="{{ url_for('setlists_show', setlist_id = setlist.id) }}">{{ setlist.name }}</a>
+    </li>
+  {% endfor %}
   
-  {% for setlist in setlists %}
+</ul>
+
+<ul class="list-group">
+  <h2>Other setlists</h2>
+  {% for setlist in otherSetlists %}
     <li class="list-group-item">
       <a href="{{ url_for('setlists_show', setlist_id = setlist.id) }}">{{ setlist.name }}</a>
     </li>
