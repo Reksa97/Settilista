@@ -11,7 +11,7 @@ from application.setlists.models import Setlist
 @login_required
 def songs_index():
     return render_template("songs/list.html", songs = Song.query.filter((Song.public==True) | (Song.account_id == current_user.id))
-                                .all(), no_songs=User.find_accounts_with_no_added_songs(), current_user_id=current_user.id)
+                                .order_by(Song.account_id != current_user.id).all(), no_songs=User.find_accounts_with_no_added_songs(), current_user_id=current_user.id)
 
 @app.route("/songs/new/")
 @login_required

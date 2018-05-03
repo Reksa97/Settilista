@@ -10,12 +10,13 @@
   {% endfor %}
   
 </ul>
-
+<h2>Other setlists</h2>
 <ul class="list-group">
-  <h2>Other setlists</h2>
+  
   {% for setlist in otherSetlists %}
     <li class="list-group-item">
       <a href="{{ url_for('setlists_show', setlist_id = setlist.id) }}">{{ setlist.name }}</a>
+      <span class="badge badge-secondary badge-pill">made by user: {{ setlist.account_username }}</span>
     </li>
   {% endfor %}
   

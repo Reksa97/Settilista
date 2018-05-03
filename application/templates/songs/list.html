@@ -1,18 +1,27 @@
-{% extends "layout.html" %} {% block body %} {% if no_songs is defined %}
+{% extends "layout.html" %} {% block body %} 
+
 
 <div class="alert alert-secondary" role="alert">
+  {% if no_songs%}
   <p>
     The following users haven't added songs yet:
   </p>
   <ul>
     {% for user in no_songs %}
     <li>
-      {{user.id}} {{user.username}}
+      {{user.username}}
     </li>
     {% endfor %}
   </ul>
+  {% else %}
+  <p>
+    All users have added a song, nice!
+  </p>
+  {% endif %}
 </div>
-{% endif %}
+
+
+
 <table class="table">
   <tr>
     <th>Song</th>

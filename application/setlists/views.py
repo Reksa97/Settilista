@@ -26,9 +26,9 @@ def setlists_create():
         return render_template("setlists/new.html", form = form)
 
     s = Setlist(form.name.data)
-    s.length = 0
     s.public = False
     s.account_id = current_user.id
+    s.account_username = current_user.username
 
     db.session().add(s)
     db.session().commit()
