@@ -2,7 +2,7 @@
 
 {% block body %}
 
-
+{% if current_user == setlist.account_id %}
 <div class="alert alert-info" role="alert">
     <h4 class="alert-heading">Ordering a setlist</h4>
     <p>
@@ -15,9 +15,15 @@
     <p><kbd>1. Song structure: AABA</kbd></p>
     <p><kbd>2. Remember to look cool</kbd></p>
 </div>
+
 <form method="GET" action="{{ url_for('songs_index') }}">
     <button type="submit" class="btn btn-primary">Add songs to this setlist</button>
 </form>
+<div class="col-xs-12" style="height:30px;"></div>
+<form method="GET" action="{{ url_for('setlists_edit', setlist_id=setlist.id) }}">
+    <button type="submit" class="btn btn-warning">Change name or delete</button>
+</form>
+{% endif %}
 <h2>Setlist: {{ setlist.name }}</h2>
 <h5>Length (minutes:seconds): <time>{{ lengthMinutes }}:{{ lengthSeconds }}</time></h5>
 <style>
@@ -36,19 +42,20 @@
   </tr>
 </thead>
 <tbody>
-    
   {% for song in songs %}
   <tr>
     <td>{{ song.name }}</td>
     <td>{{ song.artist }}</td>
     <td>{{ song.songkey }}</td>
     <td>{{ song.notes }}</td>
+
+    {% if current_user == setlist.account_id %}
     <td> 
       <form method="GET" action="{{ url_for('setlistsongs_edit', setlistsong_id=song.id) }}">
         <button type="submit" class="btn btn-primary">Edit</button>
       </form>
     </td>
-    
+    {% endif %}
 </tr>
 
   {% endfor %}

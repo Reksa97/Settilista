@@ -19,6 +19,7 @@ def setlists_form():
     return render_template("setlists/new.html", form = SetlistForm())
 
 @app.route("/setlists/", methods=["POST"])
+@login_required
 def setlists_create():
     form = SetlistForm(request.form)
 
@@ -32,10 +33,11 @@ def setlists_create():
 
     db.session().add(s)
     db.session().commit()
-
+    flash("Setlist '" + s.name + "' successfully created!")
     return redirect(url_for("setlists_index"))
 
 @app.route("/setlists/<setlist_id>", methods=["GET"])
+@login_required
 def setlists_show(setlist_id):
 
     setlist = Setlist.query.get(setlist_id)
@@ -47,4 +49,52 @@ def setlists_show(setlist_id):
     lengthMinutes = length//60
     lengthSeconds = length%60
 
-    return render_template("setlists/show.html", songs=songs, setlist=setlist, lengthMinutes=lengthMinutes, lengthSeconds=lengthSeconds)
+    return render_template("setlists/show.html", current_user = current_user.id ,songs=songs, setlist=setlist, lengthMinutes=lengthMinutes, lengthSeconds=lengthSeconds)
+
+@app.route("/setlists/<setlist_id>/delete", methods=["POST"])
+@login_required
+def setlists_delete(setlist_id):
+    s = Setlist.query.get(setlist_id)
+
+    if current_user.id != s.account_id :
+        flash("You can only delete setlists created by you!")
+        return redirect(url_for("setlists_index"))
+
+    db.session().delete(s)
+    db.session().commit()
+    flash("Setlist '" + s.name + "' successfully deleted!")
+
+    setlistsongs = SetlistSong.query.filter_by(setlist_id = setlist_id).all()
+
+    for setlistsong in setlistsongs:
+        db.session().delete(setlistsong)
+    db.session().commit()
+    flash("Songs in the setlist successfully deleted!")
+    return redirect(url_for("setlists_index"))
+
+@app.route("/setlists/<setlist_id>/edit", methods=["GET", "POST"])
+@login_required
+def setlists_edit(setlist_id):
+    s = Setlist.query.get(setlist_id)
+
+    if current_user.id != s.account_id :
+        flash("You can only edit setlists created by you!")
+        return redirect(url_for("setlists_index"))
+
+    form = SetlistForm(request.form)
+
+    if (request.method == "GET"):
+        form.name.default = s.name
+        form.process()
+        return render_template("setlists/edit.html", form=form, setlist=s)
+
+    if not form.validate():
+        return render_template("setlists/edit.html", form=form, setlist=s)
+    nimiAluksi = s.name
+    s.name = form.name.data
+    
+    db.session.commit()
+    if nimiAluksi != s.name :
+        flash("Setlist name successfully changed!")
+
+    return redirect(url_for("setlists_show", setlist_id=s.id))

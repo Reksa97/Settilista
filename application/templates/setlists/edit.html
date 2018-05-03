@@ -1,0 +1,22 @@
+{% extends "layout.html" %} {% block body %}
+
+<form method="POST" action="{{ url_for('setlists_edit', setlist_id=setlist.id) }}">
+    <div class="form-group">
+        <label for="{{ form.name.id }}" class="control-label">{{ form.name.label }}
+        </label>
+        <div>
+            {{ form.name(class_='form-control') }}
+        </div>
+        {% if form.name.errors %} {% for error in form.name.errors %}
+        <small class="form-text text-muted">{{ error }}</small>
+        {% endfor %} {% endif %}
+    </div>
+    <div>
+        <button type="submit" class="btn btn-warning">Change setlist name</button>
+    </div>
+</form>
+<div class="col-xs-12" style="height:60px;"></div>
+<form method="POST" action="{{ url_for('setlists_delete', setlist_id=setlist.id) }}">
+    <button type="submit" class="btn btn-danger">DELETE setlist</button>
+</form>
+{% endblock %}

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>SettilistaApp</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous"> 
+    crossorigin="anonymous">
 </head>
 
 <body>
@@ -45,17 +45,16 @@
 
   <main role="main" class="container">
     {% with messages = get_flashed_messages() %} {% if messages %}
-      <ul class=flashes>
-        <div class="alert alert-info" role="alert">
-          {% for message in messages %}
-          <p>{{ message }}</p>
-          {% endfor %}
-        </div> 
-      </ul>
-      {% endif %} {% endwith %} 
-    {% block body %}
+    <div class="alert alert-info" role="alert">
+    <ul class=flashes>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    </div>
+    {% endif %} {% endwith %} {% block body %}
     <p>
-      Content.
+      Hi.
     </p>
     {% endblock %}
   </main>

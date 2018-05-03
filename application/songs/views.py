@@ -175,6 +175,10 @@ def setlistsongs_delete(setlistsong_id):
 
     s = SetlistSong.query.get(setlistsong_id)
 
+    if s.account_id != current_user.id :
+        flash("You can delete songs only from a setlist you've created!")
+        return redirect(url_for("setlists_index"))
+
     db.session.delete(s)
     db.session.commit()
     flash("Song deleted")
