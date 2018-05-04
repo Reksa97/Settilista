@@ -5,15 +5,15 @@
 
 [Käyttötapaukset](https://github.com/Reksa97/Settilista/blob/master/documentation/user_stories.md)
 
-Tietokantaan voidaan tallentaa kappaleita ja keikoilla tarvittavaa tietoa niistä (sävellaji, tahtilaji, tempo, kesto) 
+Tietokantaan voidaan tallentaa kappaleita ja keikoilla tarvittavaa tietoa niistä (artisti, sävellaji, kesto, muistiinpanot) 
 ja luoda niistä settilista-kokonaisuuksia.
-Käyttäjät voivat lisätä omaan biisikirjastoon tietokannasta löytyviä kappaleita tai uusia kappaleita, jotka ylläpitäjä voi
-halutessaan lisätä kaikille saataviksi.
+Käyttäjät voivat lisätä omiin settilistoihin itse lisäämiä kappaleita ja julkiseksi asetettuja kappaleita.
 
 Toimintoja:
- * Kappaleen tietojen lisääminen, muokkaus ja poisto
- * Kappaleiden haku eri kriteereillä
- * Käyttäjän rekisteröityminen
- * Ylläpitäjän ja käyttäjän kirjautuminen
- * Kappaleiden lisääminen omaan biisikirjastoon (ja kaikille yhteiseen biisikokoelmaan)
- * Kappaleiden lisääminen settilista-kokonaisuuksiin
+ * Kappaleiden ja niiden tietojen lisääminen
+ * Kappaleiden muuttaminen julkisiksi tai yksityisiksi
+ * Settilistojen tekeminen
+ * Kappaleiden lisääminen settilistoihin
+ * Käyttäjän rekisteröityminen ja kirjautuminen
+ * Omien kappaleiden ja settilistojen muokkamineen
+ * Muiden kappaleiden ja settilistojen katseleminen
