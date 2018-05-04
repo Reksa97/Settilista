@@ -1,7 +1,7 @@
 # Settilista-tietokanta
 [Linkki herokuun](https://tsoha-settilista.herokuapp.com/)
 
-[Tietokantakaavio](https://github.com/Reksa97/Settilista/blob/master/documentation/tietokantakaavio.png)
+[Tietokantakaavio](https://github.com/Reksa97/Settilista/blob/master/documentation/Tietokantakaavio.png)
 
 [Käyttötapaukset](https://github.com/Reksa97/Settilista/blob/master/documentation/user_stories.md)
 
