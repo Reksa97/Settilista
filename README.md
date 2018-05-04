@@ -3,6 +3,8 @@
 
 [Tietokantakaavio](https://github.com/Reksa97/Settilista/blob/master/documentation/Tietokantakaavio.png)
 
+[CREATE TABLE -lauseet](https://github.com/Reksa97/Settilista/blob/master/documentation/CREATE_TABLE.md)
+
 [Käyttötapaukset](https://github.com/Reksa97/Settilista/blob/master/documentation/user_stories.md)
 
 Tietokantaan voidaan tallentaa kappaleita ja keikoilla tarvittavaa tietoa niistä (artisti, sävellaji, kesto, muistiinpanot) 
