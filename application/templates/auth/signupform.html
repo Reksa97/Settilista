@@ -1,12 +1,13 @@
 {% extends "layout.html" %} {% block body %} 
 
+<div class="alert alert-info" role="alert">
+        <p>All fields must be between 3 and 144 characters long.</p>
+</div>
 {% if error %}
 <div class="alert alert-warning" role="alert">
       <p>{{ error }}</p>
 </div>
 {% endif %}
-
-
 <form method="POST" action="{{ url_for('auth_signup_new') }}">
     <div class="form-group">
         <label for="{{ form.username.id }}" class="control-label">{{ form.username.label }}
@@ -29,7 +30,7 @@
         {% endfor %} {% endif %}
     </div>
     <div class="form-group">
-        <label for="{{ form.name.id }}" class="control-label">{{ form.name.label }}
+        <label for="{{ form.name.id }}" class="control-label">{{ form.name.label }} (Used only to greet you on the top right corner of the page after you've logged in, your username is used for everything else.)
         </label>
         <div>
             {{ form.name(class_='form-control') }}

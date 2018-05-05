@@ -29,9 +29,9 @@ class User(Base):
         return True
 
     @staticmethod
-    def find_accounts_with_no_added_songs():
+    def find_accounts_with_no_public_songs():
         stmt = text("SELECT Account.id, Account.username FROM Account"
-                    " LEFT JOIN Song ON Song.account_id = Account.id"
+                    " LEFT JOIN Song ON Song.account_id = Account.id AND Song.public"
                     " GROUP BY Account.id"
                     " HAVING COUNT(Song.id) = 0")
         res = db.engine.execute(stmt)

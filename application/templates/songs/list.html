@@ -4,8 +4,9 @@
 <div class="alert alert-secondary" role="alert">
   {% if no_songs%}
   <p>
-    The following users haven't added songs yet:
+    The following users haven't made any of their songs public yet:
   </p>
+
   <ul>
     {% for user in no_songs %}
     <li>
@@ -15,7 +16,7 @@
   </ul>
   {% else %}
   <p>
-    All users have added a song, nice!
+    All users have made a song public, nice!
   </p>
   {% endif %}
 </div>
