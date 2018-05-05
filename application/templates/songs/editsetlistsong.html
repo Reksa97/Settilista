@@ -48,7 +48,7 @@
             {{ form.notes(class_='form-control') }}
         </div>
         {% if form.notes.errors %} {% for error in form.notes.errors %}
-        <small class="form-text text-muted">{{ error }} {{ form.errors }} {{ form.non_field_errors }}</small>
+        <small class="form-text text-muted">{{ error }}</small>
         {% endfor %} {% endif %}
     </div>
     <div>
