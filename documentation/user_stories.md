@@ -56,14 +56,14 @@ UPDATE Setlist_Song SET Song.date_modified = CURRENT_TIMESTAMP, Song.length = ke
 SELECT * FROM Setlist_Song WHERE Setlist_Song.setlist_id = haluttuSettilistaId ORDER BY Setlist_Song.notes;
 ```
 
-  - Voin pitää settilistaa auki keikalla ja saada siitä tarvitsemani tiedot jokaisen kappaleen kohdalla, sekä nähdä settelistan kokonaiskeston.
+  - Voin pitää settilistaa auki keikalla ja saada siitä tarvitsemani tiedot jokaisen kappaleen kohdalla, sekä nähdä settilistan kokonaiskeston.
 
 ```
 Sama kuin yllä.
 ```
 
-  - Voin katsoa mitkä käyttäjät eivät ole lisänneet kappaleita tietokantaan.
+  - Voin katsoa mitkä käyttäjät eivät ole tehneet yhtäkään kappaletta julkiseksi.
 ```
-SELECT Account.username FROM Account LEFT JOIN Song ON Song.account_id = Account.id 
+SELECT Account.username FROM Account LEFT JOIN Song ON Song.account_id = Account.id AND Song.public
 	GROUP BY Account.id HAVING COUNT(Song.id) = 0;
 ```
