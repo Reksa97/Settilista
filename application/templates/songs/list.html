@@ -1,4 +1,4 @@
-{% extends "layout.html" %} {% block body %} 
+{% extends "layout.html" %} {% block body %}
 
 
 <div class="alert alert-secondary" role="alert">
@@ -24,37 +24,49 @@
 
 
 <table class="table">
-  <tr>
-    <th>Song</th>
-    <th>Artist</th>
-    <th>Length (seconds)</th>
-    <th></th>
-  </tr>
-  {% for song in songs %}
-  <tr>
-    <td>{{ song.name }}</td>
-    <td>{{ song.artist }}</td>
-    <td>{{ song.length }}</td>
-    <td>
-      <form method="GET" action="{{ url_for('songs_addtosetlist', song_id=song.id) }}">
-          <button type="submit" class="btn btn-primary">Add to a setlist</button>
-      </form>
-    </td>
+  <thead>
+    <tr>
+      <th style="width: 20%">Name</th>
+      <th style="width: 20%">Artist</th>
+      <th style="width: 10%">Length (s)</th>
+      <th style="width: 20%">Added</th>      
+      <th style="width: 10%">Add</th>
+      <th style="width: 10%"></th>
+      <th style="width: 10%"></th>      
+    </tr>
+  </thead>
+  <tbody>
+    {% for song in songs %}
+    <tr>
+      <td>{{ song.name }}</td>
+      <td>{{ song.artist }}</td>
+      <td>{{ song.length }}</td>
+      <td>{{ song.date_created }}</td>
+      <td>
+        <form method="GET" action="{{ url_for('songs_addtosetlist', song_id=song.id) }}">
+          <button type="submit" class="btn btn-primary">To setlist</button>
+        </form>
+      </td>
 
-    {% if current_user_id == song.account_id %}
-    <td>
-      Public: {{ song.public }}
-      <form method="POST" action="{{ url_for('songs_set_public', song_id=song.id) }}">
-        <button type="submit" class="btn btn-dark">Change status</button>
-      </form>
-    </td>
-    <td>
-      <form method="GET" action="{{ url_for('songs_edit', song_id=song.id) }}">
-        <button type="submit" class="btn btn-warning">Edit</button>
-      </form>
-    </td>
-    {% endif %}
-  </tr>
-  {% endfor %}
+      {% if current_user_id == song.account_id %}
+      <td>
+        {% if song.public %}
+        Public
+        {% else %}
+        Not public
+        {% endif %}
+        <form method="POST" action="{{ url_for('songs_set_public', song_id=song.id) }}">
+          <button type="submit" class="btn btn-dark">Change</button>
+        </form>
+      </td>
+      <td>
+        <form method="GET" action="{{ url_for('songs_edit', song_id=song.id) }}">
+          <button type="submit" class="btn btn-warning">Edit</button>
+        </form>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock %}
