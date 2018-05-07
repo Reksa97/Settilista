@@ -11,6 +11,7 @@ from application.setlists.forms import SetlistForm
 @app.route("/setlists/", methods=["GET"])
 @login_required
 def setlists_index():
+    #Seperate current users setlists from the others
     return render_template("setlists/list.html", userSetlists = Setlist.query.filter_by(account_id = current_user.id).all(), otherSetlists = Setlist.query.filter(Setlist.account_id != current_user.id).all())
 
 @app.route("/setlists/new")
@@ -27,7 +28,10 @@ def setlists_create():
         return render_template("setlists/new.html", form = form)
 
     s = Setlist(form.name.data)
+    
+    #Setlist is not public at first
     s.public = False
+    
     s.account_id = current_user.id
     s.account_username = current_user.username
 
@@ -42,7 +46,10 @@ def setlists_show(setlist_id):
 
     setlist = Setlist.query.get(setlist_id)
 
+    #Order songs in setlist by the 'notes' column
     songs = SetlistSong.query.filter_by(setlist_id = setlist_id).order_by(SetlistSong.notes).all()
+    
+    #Calculate the length of the setlist
     length = 0
     for song in songs:
         length += song.length
@@ -60,16 +67,20 @@ def setlists_delete(setlist_id):
         flash("You can only delete setlists created by you!")
         return redirect(url_for("setlists_index"))
 
-    db.session().delete(s)
-    db.session().commit()
-    flash("Setlist '" + s.name + "' successfully deleted!")
 
+    #Delete setlistsongs first
     setlistsongs = SetlistSong.query.filter_by(setlist_id = setlist_id).all()
 
     for setlistsong in setlistsongs:
         db.session().delete(setlistsong)
     db.session().commit()
-    flash("Songs in the setlist successfully deleted!")
+    flash("Songs in the setlist successfully deleted!") 
+
+    #Then delete the setlist
+    db.session().delete(s)
+    db.session().commit()
+    flash("Setlist '" + s.name + "' successfully deleted!")
+    
     return redirect(url_for("setlists_index"))
 
 @app.route("/setlists/<setlist_id>/edit", methods=["GET", "POST"])
@@ -90,11 +101,14 @@ def setlists_edit(setlist_id):
 
     if not form.validate():
         return render_template("setlists/edit.html", form=form, setlist=s)
-    nimiAluksi = s.name
+    
+    #Update row. If name was changed, flash a message
+    nameBefore = s.name
     s.name = form.name.data
     
     db.session.commit()
-    if nimiAluksi != s.name :
+    if nameBefore != s.name :
         flash("Setlist name successfully changed!")
 
+    #Show the same setlist
     return redirect(url_for("setlists_show", setlist_id=s.id))
