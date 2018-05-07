@@ -44,7 +44,8 @@ CREATE TABLE Setlist (
 	FOREIGN KEY(account_id) REFERENCES account (id)
 );
 ```
-### SetlistSong
+### Setlist_Song
+Setlist_Songilla ei ole riippuvuutta Song-tauluun. Riviä luodessa tauluun kopioidaan tietoja halutulta Song-taulun riviltä.
 ```
 CREATE TABLE Setlist_Song (
 	id INTEGER NOT NULL, 

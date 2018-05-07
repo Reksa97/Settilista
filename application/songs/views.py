@@ -125,7 +125,7 @@ def songs_delete(song_id):
 
     s = Song.query.get(song_id)
 
-    if song.account_id != current_user.id:
+    if s.account_id != current_user.id:
         flash("You can only delete songs you've added yourself!")
         return redirect(url_for("songs_index"))
 
