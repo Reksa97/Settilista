@@ -24,14 +24,18 @@ def setlists_form():
 def setlists_create():
     form = SetlistForm(request.form)
 
-    if not form.validate():
+    
+    if not form.validate() or form.name.data.isspace():
+        #Setlist name can't be only whitespace
+        if form.name.data.isspace():
+            form.name.errors.append("Name cant be only space!")
         return render_template("setlists/new.html", form = form)
 
     s = Setlist(form.name.data)
     
     #Setlist is not public at first
     s.public = False
-    
+
     s.account_id = current_user.id
     s.account_username = current_user.username
 
@@ -99,7 +103,11 @@ def setlists_edit(setlist_id):
         form.process()
         return render_template("setlists/edit.html", form=form, setlist=s)
 
-    if not form.validate():
+    
+    if not form.validate() or form.name.data.isspace():
+        #Setlist name cant be only whitespace
+        if form.name.data.isspace():
+            form.name.errors.append("Name cant be only space!")
         return render_template("setlists/edit.html", form=form, setlist=s)
     
     #Update row. If name was changed, flash a message

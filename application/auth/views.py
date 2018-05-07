@@ -39,7 +39,9 @@ def auth_signup_new():
         return render_template("auth/signupform.html", form = form,
                     error = "User with that username already exists")
 
-    if not form.validate():
+    if not form.validate() or form.username.data.isspace():
+        if form.username.data.isspace():
+            form.username.errors.append("Username can't be only whitespace")
         return render_template("auth/signupform.html", form = form)
 
     
