@@ -28,14 +28,19 @@ Toimintoja:
 ```
 python3 -m venv venv
 
+source venv/bin/activate
+
+```
+ * Asenna projektin riippuvuudet komennolla
+```
 pip3 install -r requirements.txt
 ```
-
-Käynnistä projekti komennolla:
+ * Käynnistä projekti komennolla:
 ```
 python3 run.py
 ```
-Projekti on nyt käynnissä ja voit tarkastella sitä selaimella. Osoite löytyy terminaalista riviltä:
+Projekti on nyt käynnissä ja voit tarkastella sitä selaimella. 
+Osoite löytyy terminaalista riviltä:
 ```
  * Running on http://127.0.0.1:5000/
 ```
