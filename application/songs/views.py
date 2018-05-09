@@ -10,8 +10,10 @@ from application.setlists.models import Setlist
 @app.route("/", methods=["GET"])
 @login_required
 def songs_index():
-    return render_template("songs/list.html", songs = Song.query.filter((Song.public==True) | (Song.account_id == current_user.id))
-                                .order_by(Song.account_id != current_user.id).all(), no_songs=User.find_accounts_with_no_public_songs(), current_user_id=current_user.id)
+    # Only show songs which are public or made by the current user, show your songs first
+    songs = Song.query.filter((Song.public==True) | (Song.account_id == current_user.id)).order_by(Song.account_id != current_user.id).all()
+    no_songs = User.find_accounts_with_no_public_songs()
+    return render_template("songs/list.html", songs = songs, no_songs=no_songs, current_user_id=current_user.id)
 
 @app.route("/songs/new/")
 @login_required
@@ -91,6 +93,8 @@ def songs_addtosetlist(song_id):
 
     s = Song.query.get(song_id)
     form = SetlistSongForm(request.form)
+
+    # Find current users setlists and add to choices
     setlists = Setlist.query.filter_by(account_id=current_user.id).all()
     form.setlist.choices = [(setlist.id, setlist.name) for setlist in setlists]
     
@@ -147,6 +151,7 @@ def setlistsongs_edit(setlistsong_id):
 
     form = EditSetlistSongForm(request.form)
 
+    # Add song info as defaults to the form
     if (request.method == "GET"):
         form.name.default = s.name
         form.artist.default = s.artist

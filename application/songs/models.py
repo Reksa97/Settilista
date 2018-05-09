@@ -9,6 +9,7 @@ class Song(Base):
     songkey = db.Column(db.String(4), nullable=False)
     public = db.Column(db.Boolean, nullable=False)
 
+    # account which added the song
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
                             nullable=False)
 
@@ -24,9 +25,11 @@ class SetlistSong(Base):
     songkey = db.Column(db.String(4), nullable=False)
     notes = db.Column(db.String(255), nullable=False)
 
+    # setlist which the song was added to
     setlist_id = db.Column(db.Integer, db.ForeignKey('setlist.id'),
                             nullable=False)
 
+    # user who added song to setlist
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'),
                             nullable=False)
 

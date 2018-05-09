@@ -11,7 +11,6 @@ def auth_login():
         return render_template("auth/loginform.html", form = LoginForm())
 
     form = LoginForm(request.form)
-    # mahdolliset validoinnit
 
     user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
     if not user:
@@ -39,7 +38,9 @@ def auth_signup_new():
         return render_template("auth/signupform.html", form = form,
                     error = "User with that username already exists")
 
+   
     if not form.validate() or form.username.data.isspace():
+        # username can't be only space
         if form.username.data.isspace():
             form.username.errors.append("Username can't be only whitespace")
         return render_template("auth/signupform.html", form = form)

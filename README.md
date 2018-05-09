@@ -7,8 +7,7 @@
 
 [Käyttötapaukset](https://github.com/Reksa97/Settilista/blob/master/documentation/user_stories.md)
 
-Tietokantaan voidaan tallentaa kappaleita ja keikoilla tarvittavaa tietoa niistä (artisti, sävellaji, kesto, muistiinpanot) 
-ja luoda niistä settilista-kokonaisuuksia.
+Settilista-tietokanta on tarkoitettu muusikoille 'muistilapuksi' keikoille. Tietokantaan voidaan tallentaa kappaleita ja keikoilla tarvittavaa tietoa niistä (artisti, sävellaji, kesto, muistiinpanot) ja luoda niistä settilista-kokonaisuuksia.
 Käyttäjät voivat lisätä omiin settilistoihin itse lisäämiä kappaleita ja julkiseksi asetettuja kappaleita.
 
 Toimintoja:
@@ -20,8 +19,11 @@ Toimintoja:
  * Omien kappaleiden ja settilistojen muokkamineen
  * Muiden kappaleiden ja settilistojen katseleminen
 
+Rajoitteet:
+ * Käyttäjät voivat nähdä vain itse lisäämät kappaleet ja julkisiksi muutetut kappaleet.
 
-## Sovelluksen käyttöönotto
+
+### Sovelluksen käyttöönotto
  * Lataa projektin zip-tiedosto.
  * Pura tiedostot kansioon
  * Mene projektin kansioon ja luo sinne Python-virtuaaliympäristö ja ota se käyttöön komennoilla:
