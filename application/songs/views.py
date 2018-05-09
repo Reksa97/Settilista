@@ -47,7 +47,7 @@ def songs_set_public(song_id):
 
     s = Song.query.get(song_id)
 
-    if s.public == True:
+    if s.public:
         s.public = False
     else: s.public = True
 

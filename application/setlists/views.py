@@ -12,7 +12,7 @@ from application.setlists.forms import SetlistForm
 @login_required
 def setlists_index():
     #Seperate current users setlists from the others
-    return render_template("setlists/list.html", userSetlists = Setlist.query.filter_by(account_id = current_user.id).all(), otherSetlists = Setlist.query.filter(Setlist.account_id != current_user.id).all())
+    return render_template("setlists/list.html", userSetlists = Setlist.query.filter_by(account_id = current_user.id).all(), publicSetlists = Setlist.query.filter(Setlist.public).all())
 
 @app.route("/setlists/new")
 @login_required
@@ -44,6 +44,22 @@ def setlists_create():
     flash("Setlist '" + s.name + "' successfully created!")
     return redirect(url_for("setlists_index"))
 
+@app.route("/setlists/<setlist_id>/public", methods=["POST"])
+@login_required
+def setlists_toggle_public(setlist_id):
+
+    setlist = Setlist.query.get(setlist_id)
+
+    if setlist.public:
+        setlist.public = False
+    else:
+        setlist.public = True
+
+    db.session.commit()
+    return redirect(url_for("setlists_index"))
+
+
+# Show setlistsongs of one setlist
 @app.route("/setlists/<setlist_id>", methods=["GET"])
 @login_required
 def setlists_show(setlist_id):

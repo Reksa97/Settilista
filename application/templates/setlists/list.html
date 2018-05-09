@@ -1,24 +1,50 @@
-{% extends "layout.html" %}
-
-{% block body %}
+{% extends "layout.html" %} {% block body %}
 <ul class="list-group">
   <h2>Your setlists</h2>
-  {% for setlist in userSetlists %}
-    <li class="list-group-item">
-      <a href="{{ url_for('setlists_show', setlist_id = setlist.id) }}">{{ setlist.name }}</a>
-    </li>
-  {% endfor %}
-  
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width: 70%">Name</th>
+        <th style="width: 30%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for setlist in userSetlists %}
+      <tr>
+      <td>
+        <a href="{{ url_for('setlists_show', setlist_id = setlist.id) }}">{{ setlist.name }}</a>
+       </td>
+       <td>
+          <form method="POST" action="{{ url_for('setlists_toggle_public', setlist_id=setlist.id) }}">
+            {% if setlist.public %}
+            <button type="submit" class="btn btn-success">
+              Public
+            </button>
+            {% else %}
+            <button type="submit" class="btn btn-dark">
+              Not public
+            </button>
+            {% endif %}
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
 </ul>
-<h2>Other setlists</h2>
+<h2>Public setlists</h2>
 <ul class="list-group">
-  
-  {% for setlist in otherSetlists %}
-    <li class="list-group-item">
-      <a href="{{ url_for('setlists_show', setlist_id = setlist.id) }}">{{ setlist.name }}</a>
-      <span class="badge badge-secondary badge-pill">made by user: {{ setlist.account_username }}</span>
-    </li>
+
+  {% for setlist in publicSetlists %}
+  <li class="list-group-item">
+    <a href="{{ url_for('setlists_show', setlist_id = setlist.id) }}">{{ setlist.name }}</a>
+    <span class="badge badge-secondary badge-pill">made by user: {{ setlist.account_username }}</span>
+  </li>
   {% endfor %}
-  
+
 </ul>
 {% endblock %}
