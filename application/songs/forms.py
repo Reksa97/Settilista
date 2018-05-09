@@ -27,6 +27,6 @@ class EditSetlistSongForm(FlaskForm):
     length = IntegerField("Song length (seconds)", 
     [validators.NumberRange(min=0, message="length must be atleast 0")])
     songkey = SelectField(u'Song key', choices=songkeys)
-    notes = StringField("Notes", [validators.Length(min=1,max=255)])
+    notes = StringField("Notes", [validators.Length(max=255)])
     class Meta:
         csrf = False
