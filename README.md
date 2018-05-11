@@ -48,3 +48,9 @@ Osoite löytyy terminaalista riviltä:
 ```
  * Running on http://127.0.0.1:5000/
 ```
+
+### Puuttuvat ominaisuudet
+ * Jonkinlainen admin-käyttäjä
+ * Kappaleiden ja settilistojen järjestäminen eri kriteereillä
+ * Settilistan kappaleiden järjestäminen nopeasti
+ * Katselutila omille settilistoille
