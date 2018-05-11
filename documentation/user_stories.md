@@ -1,6 +1,10 @@
 # Käyttötapaukset
 
 ### Ennen kirjautumista:
+  - Voin katsella etusivua
+```
+SELECT COUNT(User.id), COUNT(Song.id), COUNT(Setlist.id) FROM User, Song, Setlist;
+```
   - Voin rekisteröityä
 ```
 
