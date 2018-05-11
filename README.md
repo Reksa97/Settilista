@@ -52,5 +52,5 @@ Osoite löytyy terminaalista riviltä:
 ### Puuttuvat ominaisuudet
  * Jonkinlainen admin-käyttäjä
  * Kappaleiden ja settilistojen järjestäminen eri kriteereillä
- * Settilistan kappaleiden järjestäminen nopeasti
+ * Settilistan kappaleiden järjestyksen muuttaminen nopeasti
  * Katselutila omille settilistoille
