@@ -7,20 +7,23 @@
 
 [Käyttötapaukset](https://github.com/Reksa97/Settilista/blob/master/documentation/user_stories.md)
 
-Settilista-tietokanta on tarkoitettu muusikoille 'muistilapuksi' keikoille. Tietokantaan voidaan tallentaa kappaleita ja keikoilla tarvittavaa tietoa niistä (artisti, sävellaji, kesto, muistiinpanot) ja luoda niistä settilista-kokonaisuuksia.
+Settilista-tietokanta on tarkoitettu muusikoille "muistilapuksi" keikoille. Tietokantaan voidaan tallentaa kappaleita ja keikoilla tarvittavaa tietoa niistä (artisti, sävellaji, kesto, muistiinpanot) ja luoda niistä settilista-kokonaisuuksia.
 Käyttäjät voivat lisätä omiin settilistoihin itse lisäämiä kappaleita ja julkiseksi asetettuja kappaleita.
 
 Toimintoja:
- * Kappaleiden ja niiden tietojen lisääminen
- * Kappaleiden muuttaminen julkisiksi tai yksityisiksi
- * Settilistojen tekeminen
- * Kappaleiden lisääminen settilistoihin
  * Käyttäjän rekisteröityminen ja kirjautuminen
- * Omien kappaleiden ja settilistojen muokkamineen
- * Muiden kappaleiden ja settilistojen katseleminen
+ * Kappaleiden ja niiden tietojen lisääminen
+ * Omien kappaleiden muokkaaminen ja muuttaminen julkisiksi tai yksityisiksi
+ * Settilistojen tekeminen
+ * Omien settilistojen muokkaaminen ja muuttaminen julkisiksi tai yksityisiksi
+ * Omien tai julkisten kappaleiden lisääminen omiin settilistoihin
+ * Julkiseksi muutettujen settilistojen katseleminen
 
 Rajoitteet:
- * Käyttäjät voivat nähdä vain itse lisäämät kappaleet ja julkisiksi muutetut kappaleet.
+ * Käyttäjät voivat nähdä vain itse lisätyt kappaleet ja julkisiksi muutetut kappaleet
+ * Käyttäjät voivat nähdä vain itse lisätyt settilistat ja julkisiksi muutetut settilistat
+ * Käyttäjä voi muokata vain itse lisättyjä kappaleita ja settilistoja
+ * Kaikki toiminnot paitsi etusivun katseleminen vaativat kirjautumisen
 
 
 ### Sovelluksen käyttöönotto
