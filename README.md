@@ -11,7 +11,7 @@ Settilista-tietokanta on tarkoitettu muusikoille "muistilapuksi" keikoille. Tiet
 Käyttäjät voivat lisätä omiin settilistoihin itse lisäämiä kappaleita ja julkiseksi asetettuja kappaleita.
 
 Toimintoja:
- * Käyttäjän rekisteröityminen ja kirjautuminen
+ * Rekisteröityminen ja kirjautuminen
  * Kappaleiden ja niiden tietojen lisääminen
  * Omien kappaleiden muokkaaminen ja muuttaminen julkisiksi tai yksityisiksi
  * Settilistojen tekeminen
