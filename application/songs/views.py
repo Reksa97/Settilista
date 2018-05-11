@@ -7,7 +7,7 @@ from application.songs.forms import SongForm, SetlistSongForm, EditSetlistSongFo
 from application.auth.models import User
 from application.setlists.models import Setlist
 
-@app.route("/", methods=["GET"])
+@app.route("/songs", methods=["GET"])
 @login_required
 def songs_index():
     # Only show songs which are public or made by the current user, show your songs first

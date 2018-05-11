@@ -1,9 +1,18 @@
 from flask import render_template, request, redirect, url_for, flash
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 
 from application import app, db
 from application.auth.models import User
 from application.auth.forms import LoginForm, SignupForm
+from application.songs.models import Song
+from application.setlists.models import Setlist
+
+@app.route("/", methods=["GET"])
+def frontpage():
+    users = User.query.count()
+    songs = Song.query.count()
+    setlists = Setlist.query.count()
+    return render_template("auth/frontpage.html", users=users, songs=songs, setlists=setlists, current_user=current_user)
 
 @app.route("/auth/login", methods = ["GET", "POST"])
 def auth_login():
@@ -18,12 +27,12 @@ def auth_login():
                                error = "No such username or password")
 
     login_user(user)
-    return redirect(url_for("songs_index"))    
+    return redirect(url_for("frontpage"))    
 
 @app.route("/auth/logout", methods = ["GET", "POST"])
 def auth_logout():
     logout_user()
-    return redirect(url_for("songs_index"))
+    return redirect(url_for("frontpage"))
 
 @app.route("/auth/signup", methods = ["GET"])
 def auth_signup():

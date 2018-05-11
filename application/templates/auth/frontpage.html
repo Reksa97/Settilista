@@ -1,0 +1,21 @@
+{% extends "layout.html" %} {% block body %}
+<div class="jumbotron text-center">
+    <h1>
+        {% if current_user.is_authenticated %}
+        Welcome to SetlistApp, {{ current_user.username }}! 
+        {% else %}
+        Welcome to SetlistApp!
+        {% endif %}
+    </h1>
+    <p>
+        We have {{ users }} users, {{ songs }} songs and {{ setlists }} setlists.
+    </p>
+    <p>
+        {% if not current_user.is_authenticated %}
+        You can login or make an account by clicking the top right corner!
+        {% else %}
+        You can now go and add your favorite songs!
+        {% endif %}
+    </p>
+</div>
+{% endblock %}
