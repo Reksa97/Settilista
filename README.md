@@ -27,6 +27,18 @@ Rajoitteet:
 
 
 ### Sovelluksen käyttöönotto
+
+#### Docker
+
+Jos Docker on ladattu, pullaa ja käynnistä komennoilla
+```
+sudo docker pull reksa97/setlist
+
+sudo docker run -it -p 5000:5000 --rm reksa97/setlist
+```
+
+#### Venv
+
  * Lataa projektin zip-tiedosto.
  * Pura tiedostot kansioon
  * Mene projektin kansioon ja luo sinne Python-virtuaaliympäristö ja ota se käyttöön komennoilla:
@@ -43,10 +55,17 @@ pip3 install -r requirements.txt
 ```
 python3 run.py
 ```
+
+#### Osoite
+
 Projekti on nyt käynnissä ja voit tarkastella sitä selaimella. 
 Osoite löytyy terminaalista riviltä:
 ```
- * Running on http://127.0.0.1:5000/
+ * Running on http://0.0.0.0:5000/
+```
+Projekti pyörii myös osoitteessa:
+```
+http://localhost:5000/
 ```
 
 ### Puuttuvat ominaisuudet
